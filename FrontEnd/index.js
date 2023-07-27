@@ -134,7 +134,10 @@ if (isLoggedIn) {
 
     } else {
         divProjets.add();
-
+        divModifier.classList.add("hide");
+        divModifierImg.classList.add("hide");
+        divGerer.classList.add("hide");
+        divModifier.style.display = 'none';
     }
 }
 
