@@ -17,7 +17,7 @@
 </head>
 
 <body>
-	<div id="modifier" class="hide">
+	<div class="modifier hide">
 		<i class="fa-regular fa-pen-to-square fa-color-w"></i>
 		<p class="pub">Mode edition</p>
 		<button class="B publier" type="button">Publier les changements</button>
@@ -30,9 +30,8 @@
 			<ul>
 				<li>projets</li>
 				<li>contact</li>
-
-				<li><a href="connexion.html">login</a></li>
-
+				<li class="login-btn"><a href="connexion.html" id="login">login</a></li>
+				<li class="logout-btn" style="display: none;"><a href="index.html" id="logout">logout</a></li>
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
@@ -42,7 +41,6 @@
 			<figure>
 				<img src="./assets/images/sophie-bluel.png" alt="">
 			</figure>
-
 			<article>
 				<h2>Designer d'espace</h2>
 				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison
@@ -54,13 +52,13 @@
 					décorateur(trice)</p>
 			</article>
 		</section>
-		<div id="modifier_img" class="hide">
+		<div class="modifier_img hide">
 			<div>
 				<i class="fa-regular fa-pen-to-square"></i>
 				<button class="B publier" type="button">Modifier</button>
 			</div>
 		</div>
-		<div id="gerer" class="hide">
+		<div class="gerer hide">
 			<h2>Mes Projets</h2>
 			<div class="Gerer">
 				<i class="fa-regular fa-pen-to-square"></i>
@@ -68,8 +66,8 @@
 			</div>
 		</div>
 		<section id="portfolio">
-			<div id="projets">
-				<h2 class="hide">Mes Projets</h2>
+			<div class="projets">
+				<h2>Mes Projets</h2>
 				<div class="boutons">
 					<button id="tout" class="B" type="button">Tout</button>
 					<button id="objets" class="B categorie" type="button">Objets </button>
@@ -151,6 +149,7 @@
 		</nav>
 	</footer>
 	<script src="./index.js"></script>
+
 </body>
 
 </html>

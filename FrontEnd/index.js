@@ -107,40 +107,52 @@ hotelsRestaurants.addEventListener("click", function () {
     filterWorksByCategory(categoryId);
 });
 
-
-
 // Appeler la fonction pour récupérer les travaux
 getWorks();
 
-// Récupère l'indicateur de connexion depuis localStorage
-const isLoggedIn = localStorage.getItem("isLoggedIn");
 
-// Vérifie si l'utilisateur est connecté
-if (isLoggedIn) {
-    // Utilisateur connecté : effectuez les modifications d'affichage nécessaires
-    var divModifier = document.getElementById("modifier");
-    var divModifierImg = document.getElementById("modifier_img");
-    var divGerer = document.getElementById("gerer");
-    var divProjets = document.getElementById("projets");
 
-    // Supprimez la classe "hide" pour afficher les éléments
-    divModifier.classList.remove("hide");
-    divModifierImg.classList.remove("hide");
-    divGerer.classList.remove("hide");
+//Gestion connexion/déconnexion
+document.addEventListener("DOMContentLoaded", () => {
+    // Récupère l'indicateur de connexion de l'administrateur depuis localStorage
+    const isAdminConnected = JSON.parse(sessionStorage.getItem("isAdminConnected"));
+    const divModifier = document.querySelector(".modifier");
+    const divModifierImg = document.querySelector(".modifier_img");
+    const divGerer = document.querySelector(".gerer");
+    const divProjets = document.querySelector(".projets");
+    const loginBtn = document.querySelector(".login-btn");
+    const logoutBtn = document.querySelector(".logout-btn");
 
-    // Vérifiez si l'élément "divProjets" existe avant de le supprimer
-    if (divProjets) {
-        divProjets.remove();
-
+    // Vérifie si l'administrateur est connecté
+    if (isAdminConnected) {
+        // Administrateur connecté : effectuez les modifications d'affichage nécessaires
+        divModifier.style.display = "flex";
+        divModifierImg.style.display = "flex";
+        divGerer.style.display = "flex";
+        divProjets.style.display = "none";
+        loginBtn.style.display = "none"; // Masquer le bouton de connexion
+        logoutBtn.style.display = "block"; // Afficher le bouton de déconnexion
     } else {
-        divProjets.add();
-        divModifier.classList.add("hide");
-        divModifierImg.classList.add("hide");
-        divGerer.classList.add("hide");
-        divModifier.style.display = 'none';
+        divModifier.style.display = "none";
+        divModifierImg.style.display = "none";
+        divGerer.style.display = "none";
+        divProjets.style.display = "flex";
+        loginBtn.style.display = "block"; // Afficher le bouton de connexion
+        logoutBtn.style.display = "none"; // Masquer le bouton de déconnexion
     }
-}
 
+    // Fonction pour gérer la déconnexion de l'administrateur
+    const logout = () => {
+        sessionStorage.removeItem("isAdminConnected");
+        sessionStorage.removeItem("token");
+        window.location.replace("index.html");
+    };
+
+    // Écouter le clic sur le bouton "Logout"
+    logoutBtn.addEventListener("click", logout);
+});
+
+//Ouverture de la 1ere modale
 const modifWorks = () => {
     const modalGallery = document.getElementById("modal-gallery"); // Récupérez la galerie de la modal
 
@@ -160,7 +172,6 @@ const modifWorks = () => {
                 const figure = document.createElement('figure');
 
                 figure.classList.add('gallery-figure');
-
 
                 // Création d'un nouvel élément img
                 const img = document.createElement('img');
@@ -212,8 +223,7 @@ const openModal = () => {
     modifWorks();
 };
 
-const token = localStorage.getItem("token");
-
+const token = sessionStorage.getItem("token");
 function deleteImage() {
     const workId = this.parentNode.getAttribute("data-id"); // Récupérer l'ID du travail à supprimer
 
@@ -244,7 +254,7 @@ function deleteImage() {
 };
 
 // Fonctions au clic sur le bouton "Modifier"
-const modifyButton = document.getElementById("modifier");
+const modifyButton = document.querySelector(".modifier");
 modifyButton.addEventListener("click", openModal);
 
 modif.addEventListener("click", openModal);
@@ -266,6 +276,7 @@ const closeButton = document.querySelector(".close-icon");
 closeButton.addEventListener("click", function () {
     modal.style.display = "none"; // On cache la modal en modifiant le style display
 });
+
 
 //Ouverture du 2éme Fenétre.
 const btnAjouterPhoto = document.querySelector(".btn-ajouter-photo");
@@ -306,7 +317,7 @@ btnValider.addEventListener('click', addImage);
 
 function addImage(event) {
     event.preventDefault(); // Prevent form submission
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     const title = document.getElementById("imageName").value;
     const category = document.getElementById("category").value;
     const imageFile = document.getElementById("image").files[0];
@@ -322,13 +333,13 @@ function addImage(event) {
         return;
     }
 
-    //check if the image does not exceed 4mo//
+    // On vérifie si l'image ne dépasse pas 4mo //
     if (image.size > 4 * 1024 * 1024) {
         alert("La taille de l'image ne doit pas dépasser 4 Mo.");
         return;
     }
 
-    // Créez un nouvel objet FormData et ajoutez les données du formulaire
+    // On Crée un nouvel objet FormData et on ajoute les données du formulaire
     const formData = new FormData();
     formData.append("image", imageFile);
     formData.append("title", title);
@@ -343,9 +354,9 @@ function addImage(event) {
         })
         .then(response => response.json())
         .then(work => {
-            // L'ajout de l'image a réussi, maintenant vous pouvez mettre à jour la galerie et la galerie modale
+            // L'ajout de l'image a réussi, maintenant on pout mettre à jour la galerie et la galerie modale
 
-            // Mettez à jour la galerie principale
+            // On Met à jour la galerie principale
             const gallery = document.querySelector('.gallery');
             const figure = document.createElement('figure');
             const img = document.createElement('img');
@@ -356,7 +367,7 @@ function addImage(event) {
             figure.appendChild(img);
             figure.appendChild(figcaption);
             gallery.appendChild(figure);
-            // Mettez à jour la galerie modale
+            //On met à jour la galerie modale
             const modalGallery = document.getElementById('modal-gallery');
             const modalFigure = document.createElement('figure');
             modalFigure.classList.add('gallery-figure');

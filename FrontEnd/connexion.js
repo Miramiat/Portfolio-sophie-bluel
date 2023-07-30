@@ -1,6 +1,4 @@
 
-
-
 const urlL = 'http://localhost:5678/api/users/login';
 
 const submitbtn = document.getElementById("submitbtn");
@@ -41,17 +39,20 @@ submitbtn.addEventListener("click", (e) => {
                 errorMessage.textContent = `Error: ${authResponse.status}`;
             }
         })
+
         .then((userData) => {
             console.log("userData: ", userData);
             if (userData) {
                 const token = userData.token;
-                localStorage.setItem("isLoggedIn", "true"); // Enregistre l'indicateur de connexion
-                localStorage.setItem("token", token);
+                sessionStorage.setItem("isAdminConnected", JSON.stringify(true)); // Indicateur de connexion d'administrateur
+                sessionStorage.setItem("token", token);
                 window.location.replace("index.html");
+                
             }
         })
         .catch((error) => console.error(error));
 });
+
 
 
 
