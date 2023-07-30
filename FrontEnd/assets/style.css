@@ -193,10 +193,7 @@ li:hover {
 
 #introduction {
 	display: flex;
-
 	align-items: center;
-
-
 }
 
 #introduction figure {
@@ -230,6 +227,8 @@ li:hover {
 	display: flex;
 	flex-direction: column;
 }
+
+/*Boutons de filtrage*/
 
 .boutons {
 	display: flex;
@@ -286,6 +285,8 @@ li:hover {
 	border-radius: 40px;
 }
 
+
+/* Connexion*/
 .link {
 	text-align: center;
 	color: #000;
@@ -344,6 +345,9 @@ input[type="submit"] {
 a {
 	text-decoration: none;
 }
+
+
+/* Modales */
 
 .hide {
 	display: none;
@@ -564,7 +568,7 @@ hr {
 	background-color: #fff;
 }
 
-/*Modal 2*/
+/*Modale 2*/
 .modal_2 {
 	position: fixed;
 	top: 0;
@@ -623,10 +627,10 @@ hr {
 .fa-arrow-left {
 	left: 10px;
 	cursor: pointer;
-padding: 1px 0px 1.9919624328613281px 0px;
+	padding: 1px 0px 1.9919624328613281px 0px;
 }
 
-.back-icon{
+.back-icon {
 	margin-top: 20px;
 	margin-right: 645px;
 }
@@ -634,8 +638,6 @@ padding: 1px 0px 1.9919624328613281px 0px;
 .arrows {
 	transform: translateY(-5px) translateX(-10px);
 }
-
-
 
 .ajout-image {
 	display: flex;
@@ -646,8 +648,6 @@ padding: 1px 0px 1.9919624328613281px 0px;
 	width: 420px;
 	height: 169px;
 	margin: auto;
-
-
 	border-radius: 3px;
 	background-color: #E8F1F6;
 }
@@ -672,25 +672,22 @@ padding: 1px 0px 1.9919624328613281px 0px;
 	font-weight: 500;
 	line-height: 16px;
 	height: 36px;
-
 	padding-left: 25px;
 	padding-right: 25px;
 	margin: auto;
 	background-color: #CBD6DC;
 	border: none;
 }
-.type-image{
+
+.type-image {
 	margin-top: 0px;
-font-size: 10px;
-font-weight: 400;
-line-height: 12px;
-letter-spacing: 0em;
-text-align: center;
-margin-bottom: 15px;
-
+	font-size: 10px;
+	font-weight: 400;
+	line-height: 12px;
+	letter-spacing: 0em;
+	text-align: center;
+	margin-bottom: 15px;
 }
-
-
 
 /* Style pour le label */
 form div label {
@@ -700,7 +697,6 @@ form div label {
 	margin-top: 15px;
 	text-align: left;
 	margin-left: 110px;
-
 }
 
 /* Style pour le select */
@@ -726,7 +722,6 @@ select {
 	width: 420.0000000000016px;
 	top: 1207px;
 	left: 510px;
-	
 	border: 1px solid #B3B3B3;
 	margin: auto;
 	margin-top: 50px;
@@ -745,10 +740,6 @@ select {
 	font-size: 1.2em;
 	margin-top: 20px;
 }
-
-
-
-
 
 footer nav ul {
 	display: flex;

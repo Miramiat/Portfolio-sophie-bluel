@@ -110,8 +110,6 @@ hotelsRestaurants.addEventListener("click", function () {
 // Appeler la fonction pour récupérer les travaux
 getWorks();
 
-
-
 //Gestion connexion/déconnexion
 document.addEventListener("DOMContentLoaded", () => {
     // Récupère l'indicateur de connexion de l'administrateur depuis localStorage
@@ -224,6 +222,7 @@ const openModal = () => {
 };
 
 const token = sessionStorage.getItem("token");
+
 function deleteImage() {
     const workId = this.parentNode.getAttribute("data-id"); // Récupérer l'ID du travail à supprimer
 
@@ -277,7 +276,6 @@ closeButton.addEventListener("click", function () {
     modal.style.display = "none"; // On cache la modal en modifiant le style display
 });
 
-
 //Ouverture du 2éme Fenétre.
 const btnAjouterPhoto = document.querySelector(".btn-ajouter-photo");
 btnAjouterPhoto.addEventListener("click", function () {
@@ -306,8 +304,6 @@ imageInput.addEventListener('change', function (event) {
         faImage.style.display = 'none';
         typeImage.style.display = 'none';
         btnAddImg.style.display = 'none';
-
-
     };
     reader.readAsDataURL(file);
 });

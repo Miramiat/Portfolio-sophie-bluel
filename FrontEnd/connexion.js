@@ -1,6 +1,5 @@
 
 const urlL = 'http://localhost:5678/api/users/login';
-
 const submitbtn = document.getElementById("submitbtn");
 const errorMessage = document.getElementById("errorMessage");
 
@@ -13,7 +12,6 @@ submitbtn.addEventListener("click", (e) => {
         errorMessage.textContent = "Veuillez remplir tous les champs";
         return;
     }
-
     const loginData = {
         email: email,
         password: password
@@ -46,8 +44,7 @@ submitbtn.addEventListener("click", (e) => {
                 const token = userData.token;
                 sessionStorage.setItem("isAdminConnected", JSON.stringify(true)); // Indicateur de connexion d'administrateur
                 sessionStorage.setItem("token", token);
-                window.location.replace("index.html");
-                
+                window.location.replace("index.html");               
             }
         })
         .catch((error) => console.error(error));
