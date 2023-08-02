@@ -15,6 +15,7 @@
 		crossorigin="anonymous" referrerpolicy="no-referrer">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
+
 <body>
 	<div class="modifier hide">
 		<i class="fa-regular fa-pen-to-square fa-color-w"></i>
@@ -68,10 +69,10 @@
 			<div class="projets">
 				<h2>Mes Projets</h2>
 				<div class="boutons">
-					<button id="tout" class="B" type="button">Tout</button>
-					<button id="objets" class="B categorie" type="button">Objets </button>
-					<button id="appartements" class="B categorie" type="button">Appartements</button>
-					<button id="hotelsRestaurants" class="B categorie" type="button">Hôtels & restaurants</button>
+					<button id="boutonTous" class="button active categorie">Tous</button>
+					<button id="objets" class="button categorie">Objets</button>
+					<button id="appartements" class="button categorie">Appartements</button>
+					<button id="hotelsRestaurants" class="button categorie">Hôtels & restaurants</button>
 				</div>
 			</div>
 			<div class="gallery">
@@ -117,7 +118,7 @@
 					<div id="previewImage" class="ajout-image">
 						<i class="fa-sharp fa-regular fa-image"></i>
 						<label for="image" class="B btn-addImg">+ Ajouter une photo</label>
-						<input type="file" id="image" name="image" style="display: none;">
+						<input type="file" id="image" name="image" accept=".jpg, .jpeg, .png" style="display: none;">
 						<img id="preview" src="#" alt="Aperçu de l'image" style="display: none; max-width: 200px;">
 						<p class="type-image">jpg, png : 4mo max</p>
 					</div>

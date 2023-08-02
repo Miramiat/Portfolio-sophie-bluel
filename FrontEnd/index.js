@@ -2,7 +2,7 @@ const urlW = "http://localhost:5678/api/works";
 const urlC = "http://localhost:5678/api/categories";
 const gallery = document.querySelector(".gallery");
 const boutons = document.querySelector(".boutons");
-const boutonTout = document.getElementById("tout");
+const boutonTous = document.getElementById("boutonTous");
 const objets = document.getElementById("objets");
 const appartements = document.getElementById("appartements");
 const hotelsRestaurants = document.getElementById("hotelsRestaurants");
@@ -46,12 +46,12 @@ const getWorks = () => {
 getWorks();
 
 // Gestion des boutons
-boutonTout.addEventListener("click", function () {
+boutonTous.addEventListener("click", function () {
     getWorks();
 });
 
 // Fonction pour filtrer les travaux par catégorie
-const filterWorksByCategory = (categoryId) => {
+const filterWorksByCategory = (categoryId, clickedButton) => {
     fetch(urlW)
         .then(function (response) {
             return response.json();
@@ -91,20 +91,42 @@ const filterWorksByCategory = (categoryId) => {
         });
 };
 
+// Fonction pour réinitialiser l'apparence de tous les boutons de filtrage
+const resetButtonColors = () => {
+    objets.classList.remove("active");
+    appartements.classList.remove("active");
+    hotelsRestaurants.classList.remove("active");
+    boutonTous.classList.remove("active");
+};
+
 // Gestion des boutons
 objets.addEventListener("click", function () {
     const categoryId = 1; // L'ID de la catégorie "Objets"
-    filterWorksByCategory(categoryId);
+    resetButtonColors();
+    objets.classList.add("active");
+    filterWorksByCategory(categoryId, objets);
 });
 
 appartements.addEventListener("click", function () {
     const categoryId = 2; // L'ID de la catégorie "Appartements"
-    filterWorksByCategory(categoryId);
+    resetButtonColors();
+    appartements.classList.add("active");
+    filterWorksByCategory(categoryId, appartements);
 });
 
 hotelsRestaurants.addEventListener("click", function () {
     const categoryId = 3; // L'ID de la catégorie "Hôtels & restaurants"
-    filterWorksByCategory(categoryId);
+    resetButtonColors();
+    hotelsRestaurants.classList.add("active");
+    filterWorksByCategory(categoryId, hotelsRestaurants);
+});
+
+// Gestion du bouton "Tous"
+boutonTous.addEventListener("click", function () {
+    resetButtonColors();
+    boutonTous.classList.add("active");
+    // Afficher tous les travaux en appelant la fonction getWorks()
+    getWorks();
 });
 
 // Appeler la fonction pour récupérer les travaux
@@ -286,7 +308,8 @@ btnAjouterPhoto.addEventListener("click", function () {
     divModalContent.classList.add("hide");
 });
 
-// Code JavaScript pour prévisualiser l'image sélectionnée
+const allowedExtensions = ["jpg", "jpeg", "png"];
+
 const imageInput = document.getElementById('image');
 const previewImage = document.getElementById('preview');
 const faImage = document.querySelector('.fa-image');
@@ -295,6 +318,14 @@ const btnAddImg = document.querySelector('.btn-addImg');
 
 imageInput.addEventListener('change', function (event) {
     const file = event.target.files[0];
+    const extension = file.name.split('.').pop().toLowerCase();
+
+    // Vérifier si l'extension est autorisée
+    if (!allowedExtensions.includes(extension)) {
+        alert("Seuls les fichiers JPG et PNG sont autorisés.");
+        return;
+    }
+
     const reader = new FileReader();
     reader.onload = function (e) {
         previewImage.src = e.target.result;
@@ -350,7 +381,7 @@ function addImage(event) {
         })
         .then(response => response.json())
         .then(work => {
-            // L'ajout de l'image a réussi, maintenant on pout mettre à jour la galerie et la galerie modale
+            // L'ajout de l'image a réussi, maintenant on peut mettre à jour la galerie et la galerie modale
 
             // On Met à jour la galerie principale
             const gallery = document.querySelector('.gallery');
@@ -363,7 +394,8 @@ function addImage(event) {
             figure.appendChild(img);
             figure.appendChild(figcaption);
             gallery.appendChild(figure);
-            //On met à jour la galerie modale
+
+            // On met à jour la galerie modale
             const modalGallery = document.getElementById('modal-gallery');
             const modalFigure = document.createElement('figure');
             modalFigure.classList.add('gallery-figure');
@@ -375,6 +407,7 @@ function addImage(event) {
             modalFigure.appendChild(modalImg);
             modalFigure.appendChild(modalFigcaption);
             modalGallery.appendChild(modalFigure);
+
             alert('Le nouvel travail a été ajouté avec succès.');
             getWorks();
             modifWorks();
@@ -384,15 +417,15 @@ function addImage(event) {
             console.error("Erreur lors de l'ajout de l'image", error);
         });
 }
+
 const closeModal2 = document.getElementById("closeModal2");
 const backIcon = document.querySelector(".back-icon");
 closeModal2.addEventListener("click", function () {
-    modal.style.display = "none"; // On cache la modal en modifiant le style display
+    modal.style.display = "none";
 });
 backIcon.addEventListener("click", function () {
     const divModalWraper = document.querySelector(".modal-wraper");
     const divModalContent = document.querySelector(".modal-content");
     divModalWraper.classList.add("hide");
     divModalContent.classList.remove("hide");
-
-})
+});
